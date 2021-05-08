@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="baebc15a9aff46f5a9e7a6f7eb7d8e9e" Name="Diagram1">
+        <EntityTypeShape EntityType="LIMUPAStoreModel.ACCOUNT" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.CART" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.CARTDETAIL" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.COMMENT" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.FAVORITE" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.FEATURE" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.MEMBER" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.ORDER" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.ORDERSTATU" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.PAYMENT" Width="1.5" PointX="6" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.PRODUCER" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.PRODUCT" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.PRODUCTTYPE" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.RATING" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMUPAStoreModel.ROLE" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_ACCOUNT_MEMBER" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_ACCOUNT_ROLES" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_CART_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_COMMENT_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_FAVORITE_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_ORDERS_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_RATING_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_CARTDETAIL_CART" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_ORDERS_CART" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_CARTDETAIL_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_COMMENT_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_FAVORITE_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_FEATURE_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_ORDERS_PAYMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_ORDERS_STATUS" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_PRODUCT_PRODUCER" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_PRODUCT_PRODUCTTYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMUPAStoreModel.PK_RATING_PRODUCT" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

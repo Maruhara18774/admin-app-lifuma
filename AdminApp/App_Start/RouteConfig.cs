@@ -12,12 +12,16 @@ namespace AdminApp
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{area}/{controller}/{action}/{id}",
+                defaults: new { area = "Main", controller = "Login", action = "Login", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "AdminDefault",
+                url: "{area}/{controller}/{action}/{id}",
+                defaults: new { area = "Admin", controller = "Account", action = "ListAccount", id = UrlParameter.Optional }
+                );
         }
     }
 }

@@ -1,0 +1,1123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LIMUPAStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACCOUNT_ID" />
+          </Key>
+          <Property Name="ACCOUNT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCOUNT_FIRSTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="ACCOUNT_LASTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="ACCOUNT_PASSWORD" Type="varchar" MaxLength="100" />
+          <Property Name="PHONE" Type="varchar" MaxLength="20" />
+          <Property Name="ACCOUNT_ADDRESS" Type="text" />
+          <Property Name="ROLE_ID" Type="int" />
+          <Property Name="MEMBER_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="CART">
+          <Key>
+            <PropertyRef Name="CART_ID" />
+          </Key>
+          <Property Name="CART_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="TOTAL" Type="float" />
+        </EntityType>
+        <EntityType Name="CARTDETAIL">
+          <Key>
+            <PropertyRef Name="CARTDETAIL_ID" />
+          </Key>
+          <Property Name="CARTDETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CART_ID" Type="int" />
+          <Property Name="PRODUCT_ID" Type="int" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="int" />
+        </EntityType>
+        <EntityType Name="COMMENT">
+          <Key>
+            <PropertyRef Name="COMMENT_ID" />
+          </Key>
+          <Property Name="COMMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CONTENT" Type="text" />
+          <Property Name="PRODUCT_ID" Type="int" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="FAVORITE">
+          <Key>
+            <PropertyRef Name="FAVORITE_ID" />
+          </Key>
+          <Property Name="FAVORITE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+          <Property Name="PRODUCT_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="FEATURE">
+          <Key>
+            <PropertyRef Name="FEATURE_ID" />
+          </Key>
+          <Property Name="FEATURE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="MEMBER_ID" />
+          </Key>
+          <Property Name="MEMBER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="BONUS" Type="float" />
+        </EntityType>
+        <EntityType Name="ORDERS">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+          <Property Name="SHIP_ADDRESS" Type="text" />
+          <Property Name="PHONE" Type="varchar" MaxLength="20" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="PAYMENT_ID" Type="int" />
+          <Property Name="STATUS_ID" Type="int" />
+          <Property Name="DISCOUNT" Type="float" />
+          <Property Name="TOTAL" Type="float" />
+          <Property Name="CART_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ORDERSTATUS">
+          <Key>
+            <PropertyRef Name="STATUS_ID" />
+          </Key>
+          <Property Name="STATUS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATUS_NAME" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PAYMENT">
+          <Key>
+            <PropertyRef Name="PAYMENT_ID" />
+          </Key>
+          <Property Name="PAYMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PAYMENT_METHOD" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PRODUCER">
+          <Key>
+            <PropertyRef Name="PRODUCER_ID" />
+          </Key>
+          <Property Name="PRODUCER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUCER_NAME" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="COLOR" Type="nvarchar" MaxLength="50" />
+          <Property Name="PRODUCT_IMAGE" Type="varchar(max)" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="PRODUCT_COUNT" Type="int" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="PRODUCER_ID" Type="int" />
+          <Property Name="PRODUCTTYPE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCTTYPE">
+          <Key>
+            <PropertyRef Name="PRODUCTTYPE_ID" />
+          </Key>
+          <Property Name="PRODUCTTYPE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RATING">
+          <Key>
+            <PropertyRef Name="RATING_ID" />
+          </Key>
+          <Property Name="RATING_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STAR" Type="tinyint" />
+          <Property Name="CONTENT" Type="nvarchar(max)" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+          <Property Name="PRODUCT_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ROLE_ID" />
+          </Key>
+          <Property Name="ROLE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROLE_NAME" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="PK_ACCOUNT_MEMBER">
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER">
+              <PropertyRef Name="MEMBER_ID" />
+            </Principal>
+            <Dependent Role="ACCOUNT">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ACCOUNT_ROLES">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="0..1" />
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ROLE_ID" />
+            </Principal>
+            <Dependent Role="ACCOUNT">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CART_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="CART">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CARTDETAIL_CART">
+          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
+          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CART">
+              <PropertyRef Name="CART_ID" />
+            </Principal>
+            <Dependent Role="CARTDETAIL">
+              <PropertyRef Name="CART_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CARTDETAIL_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CARTDETAIL">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_COMMENT_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="COMMENT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_COMMENT_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="COMMENT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_FAVORITE_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="FAVORITE" Type="Self.FAVORITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="FAVORITE">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_FAVORITE_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="FAVORITE" Type="Self.FAVORITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="FAVORITE">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_FEATURE_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="FEATURE" Type="Self.FEATURE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="FEATURE">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_CART">
+          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CART">
+              <PropertyRef Name="CART_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="CART_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_PAYMENT">
+          <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT">
+              <PropertyRef Name="PAYMENT_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="PAYMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_STATUS">
+          <End Role="ORDERSTATUS" Type="Self.ORDERSTATUS" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERSTATUS">
+              <PropertyRef Name="STATUS_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="STATUS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_PRODUCT_PRODUCER">
+          <End Role="PRODUCER" Type="Self.PRODUCER" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCER">
+              <PropertyRef Name="PRODUCER_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_PRODUCT_PRODUCTTYPE">
+          <End Role="PRODUCTTYPE" Type="Self.PRODUCTTYPE" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTTYPE">
+              <PropertyRef Name="PRODUCTTYPE_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCTTYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_RATING_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="RATING" Type="Self.RATING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="RATING">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_RATING_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="RATING" Type="Self.RATING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="RATING">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LIMUPAStoreModelStoreContainer">
+          <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CARTDETAIL" EntityType="Self.CARTDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAVORITE" EntityType="Self.FAVORITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FEATURE" EntityType="Self.FEATURE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERSTATUS" EntityType="Self.ORDERSTATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCER" EntityType="Self.PRODUCER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTTYPE" EntityType="Self.PRODUCTTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RATING" EntityType="Self.RATING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="PK_ACCOUNT_MEMBER" Association="Self.PK_ACCOUNT_MEMBER">
+            <End Role="MEMBER" EntitySet="MEMBER" />
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ACCOUNT_ROLES" Association="Self.PK_ACCOUNT_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CART_ACCOUNT" Association="Self.PK_CART_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="CART" EntitySet="CART" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CARTDETAIL_CART" Association="Self.PK_CARTDETAIL_CART">
+            <End Role="CART" EntitySet="CART" />
+            <End Role="CARTDETAIL" EntitySet="CARTDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CARTDETAIL_PRODUCT" Association="Self.PK_CARTDETAIL_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="CARTDETAIL" EntitySet="CARTDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="PK_COMMENT_ACCOUNT" Association="Self.PK_COMMENT_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="COMMENT" EntitySet="COMMENT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_COMMENT_PRODUCT" Association="Self.PK_COMMENT_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="COMMENT" EntitySet="COMMENT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_FAVORITE_ACCOUNT" Association="Self.PK_FAVORITE_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="FAVORITE" EntitySet="FAVORITE" />
+          </AssociationSet>
+          <AssociationSet Name="PK_FAVORITE_PRODUCT" Association="Self.PK_FAVORITE_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="FAVORITE" EntitySet="FAVORITE" />
+          </AssociationSet>
+          <AssociationSet Name="PK_FEATURE_PRODUCT" Association="Self.PK_FEATURE_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="FEATURE" EntitySet="FEATURE" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_ACCOUNT" Association="Self.PK_ORDERS_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_CART" Association="Self.PK_ORDERS_CART">
+            <End Role="CART" EntitySet="CART" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_PAYMENT" Association="Self.PK_ORDERS_PAYMENT">
+            <End Role="PAYMENT" EntitySet="PAYMENT" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_STATUS" Association="Self.PK_ORDERS_STATUS">
+            <End Role="ORDERSTATUS" EntitySet="ORDERSTATUS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_PRODUCT_PRODUCER" Association="Self.PK_PRODUCT_PRODUCER">
+            <End Role="PRODUCER" EntitySet="PRODUCER" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_PRODUCT_PRODUCTTYPE" Association="Self.PK_PRODUCT_PRODUCTTYPE">
+            <End Role="PRODUCTTYPE" EntitySet="PRODUCTTYPE" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_RATING_ACCOUNT" Association="Self.PK_RATING_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="RATING" EntitySet="RATING" />
+          </AssociationSet>
+          <AssociationSet Name="PK_RATING_PRODUCT" Association="Self.PK_RATING_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="RATING" EntitySet="RATING" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LIMUPAStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACCOUNT_ID" />
+          </Key>
+          <Property Name="ACCOUNT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCOUNT_FIRSTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT_LASTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNT_PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNT_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ROLE_ID" Type="Int32" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <NavigationProperty Name="MEMBER" Relationship="Self.PK_ACCOUNT_MEMBER" FromRole="ACCOUNT" ToRole="MEMBER" />
+          <NavigationProperty Name="ROLE" Relationship="Self.PK_ACCOUNT_ROLES" FromRole="ACCOUNT" ToRole="ROLES" />
+          <NavigationProperty Name="CARTs" Relationship="Self.PK_CART_ACCOUNT" FromRole="ACCOUNT" ToRole="CART" />
+          <NavigationProperty Name="COMMENTs" Relationship="Self.PK_COMMENT_ACCOUNT" FromRole="ACCOUNT" ToRole="COMMENT" />
+          <NavigationProperty Name="FAVORITEs" Relationship="Self.PK_FAVORITE_ACCOUNT" FromRole="ACCOUNT" ToRole="FAVORITE" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_ACCOUNT" FromRole="ACCOUNT" ToRole="ORDERS" />
+          <NavigationProperty Name="RATINGs" Relationship="Self.PK_RATING_ACCOUNT" FromRole="ACCOUNT" ToRole="RATING" />
+        </EntityType>
+        <EntityType Name="CART">
+          <Key>
+            <PropertyRef Name="CART_ID" />
+          </Key>
+          <Property Name="CART_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="TOTAL" Type="Double" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_CART_ACCOUNT" FromRole="CART" ToRole="ACCOUNT" />
+          <NavigationProperty Name="CARTDETAILs" Relationship="Self.PK_CARTDETAIL_CART" FromRole="CART" ToRole="CARTDETAIL" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_CART" FromRole="CART" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="CARTDETAIL">
+          <Key>
+            <PropertyRef Name="CARTDETAIL_ID" />
+          </Key>
+          <Property Name="CARTDETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CART_ID" Type="Int32" />
+          <Property Name="PRODUCT_ID" Type="Int32" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <NavigationProperty Name="CART" Relationship="Self.PK_CARTDETAIL_CART" FromRole="CARTDETAIL" ToRole="CART" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_CARTDETAIL_PRODUCT" FromRole="CARTDETAIL" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="COMMENT">
+          <Key>
+            <PropertyRef Name="COMMENT_ID" />
+          </Key>
+          <Property Name="COMMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Int32" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_COMMENT_ACCOUNT" FromRole="COMMENT" ToRole="ACCOUNT" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_COMMENT_PRODUCT" FromRole="COMMENT" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="FAVORITE">
+          <Key>
+            <PropertyRef Name="FAVORITE_ID" />
+          </Key>
+          <Property Name="FAVORITE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <Property Name="PRODUCT_ID" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_FAVORITE_ACCOUNT" FromRole="FAVORITE" ToRole="ACCOUNT" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_FAVORITE_PRODUCT" FromRole="FAVORITE" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="FEATURE">
+          <Key>
+            <PropertyRef Name="FEATURE_ID" />
+          </Key>
+          <Property Name="FEATURE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCT_ID" Type="Int32" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_FEATURE_PRODUCT" FromRole="FEATURE" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="MEMBER_ID" />
+          </Key>
+          <Property Name="MEMBER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BONUS" Type="Double" />
+          <NavigationProperty Name="ACCOUNTs" Relationship="Self.PK_ACCOUNT_MEMBER" FromRole="MEMBER" ToRole="ACCOUNT" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <Property Name="SHIP_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="PAYMENT_ID" Type="Int32" />
+          <Property Name="STATUS_ID" Type="Int32" />
+          <Property Name="DISCOUNT" Type="Double" />
+          <Property Name="TOTAL" Type="Double" />
+          <Property Name="CART_ID" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_ORDERS_ACCOUNT" FromRole="ORDERS" ToRole="ACCOUNT" />
+          <NavigationProperty Name="CART" Relationship="Self.PK_ORDERS_CART" FromRole="ORDERS" ToRole="CART" />
+          <NavigationProperty Name="PAYMENT" Relationship="Self.PK_ORDERS_PAYMENT" FromRole="ORDERS" ToRole="PAYMENT" />
+          <NavigationProperty Name="ORDERSTATU" Relationship="Self.PK_ORDERS_STATUS" FromRole="ORDERS" ToRole="ORDERSTATUS" />
+        </EntityType>
+        <EntityType Name="ORDERSTATU">
+          <Key>
+            <PropertyRef Name="STATUS_ID" />
+          </Key>
+          <Property Name="STATUS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_STATUS" FromRole="ORDERSTATUS" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="PAYMENT">
+          <Key>
+            <PropertyRef Name="PAYMENT_ID" />
+          </Key>
+          <Property Name="PAYMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PAYMENT_METHOD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_PAYMENT" FromRole="PAYMENT" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="PRODUCER">
+          <Key>
+            <PropertyRef Name="PRODUCER_ID" />
+          </Key>
+          <Property Name="PRODUCER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCTs" Relationship="Self.PK_PRODUCT_PRODUCER" FromRole="PRODUCER" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="COLOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_COUNT" Type="Int32" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="PRODUCER_ID" Type="Int32" />
+          <Property Name="PRODUCTTYPE_ID" Type="Int32" />
+          <NavigationProperty Name="CARTDETAILs" Relationship="Self.PK_CARTDETAIL_PRODUCT" FromRole="PRODUCT" ToRole="CARTDETAIL" />
+          <NavigationProperty Name="COMMENTs" Relationship="Self.PK_COMMENT_PRODUCT" FromRole="PRODUCT" ToRole="COMMENT" />
+          <NavigationProperty Name="FAVORITEs" Relationship="Self.PK_FAVORITE_PRODUCT" FromRole="PRODUCT" ToRole="FAVORITE" />
+          <NavigationProperty Name="FEATUREs" Relationship="Self.PK_FEATURE_PRODUCT" FromRole="PRODUCT" ToRole="FEATURE" />
+          <NavigationProperty Name="PRODUCER" Relationship="Self.PK_PRODUCT_PRODUCER" FromRole="PRODUCT" ToRole="PRODUCER" />
+          <NavigationProperty Name="PRODUCTTYPE" Relationship="Self.PK_PRODUCT_PRODUCTTYPE" FromRole="PRODUCT" ToRole="PRODUCTTYPE" />
+          <NavigationProperty Name="RATINGs" Relationship="Self.PK_RATING_PRODUCT" FromRole="PRODUCT" ToRole="RATING" />
+        </EntityType>
+        <EntityType Name="PRODUCTTYPE">
+          <Key>
+            <PropertyRef Name="PRODUCTTYPE_ID" />
+          </Key>
+          <Property Name="PRODUCTTYPE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCTs" Relationship="Self.PK_PRODUCT_PRODUCTTYPE" FromRole="PRODUCTTYPE" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="RATING">
+          <Key>
+            <PropertyRef Name="RATING_ID" />
+          </Key>
+          <Property Name="RATING_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STAR" Type="Byte" />
+          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <Property Name="PRODUCT_ID" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_RATING_ACCOUNT" FromRole="RATING" ToRole="ACCOUNT" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_RATING_PRODUCT" FromRole="RATING" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ROLE_ID" />
+          </Key>
+          <Property Name="ROLE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROLE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACCOUNTs" Relationship="Self.PK_ACCOUNT_ROLES" FromRole="ROLES" ToRole="ACCOUNT" />
+        </EntityType>
+        <Association Name="PK_ACCOUNT_MEMBER">
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER">
+              <PropertyRef Name="MEMBER_ID" />
+            </Principal>
+            <Dependent Role="ACCOUNT">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ACCOUNT_ROLES">
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="0..1" />
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ROLE_ID" />
+            </Principal>
+            <Dependent Role="ACCOUNT">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CART_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="CART">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_COMMENT_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="COMMENT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_FAVORITE_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="FAVORITE" Type="Self.FAVORITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="FAVORITE">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_RATING_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="RATING" Type="Self.RATING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="RATING">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CARTDETAIL_CART">
+          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
+          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CART">
+              <PropertyRef Name="CART_ID" />
+            </Principal>
+            <Dependent Role="CARTDETAIL">
+              <PropertyRef Name="CART_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_CART">
+          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CART">
+              <PropertyRef Name="CART_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="CART_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CARTDETAIL_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CARTDETAIL">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_COMMENT_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="COMMENT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_FAVORITE_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="FAVORITE" Type="Self.FAVORITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="FAVORITE">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_FEATURE_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="FEATURE" Type="Self.FEATURE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="FEATURE">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_PAYMENT">
+          <End Role="PAYMENT" Type="Self.PAYMENT" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT">
+              <PropertyRef Name="PAYMENT_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="PAYMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_STATUS">
+          <End Role="ORDERSTATUS" Type="Self.ORDERSTATU" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERSTATUS">
+              <PropertyRef Name="STATUS_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="STATUS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_PRODUCT_PRODUCER">
+          <End Role="PRODUCER" Type="Self.PRODUCER" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCER">
+              <PropertyRef Name="PRODUCER_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_PRODUCT_PRODUCTTYPE">
+          <End Role="PRODUCTTYPE" Type="Self.PRODUCTTYPE" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTTYPE">
+              <PropertyRef Name="PRODUCTTYPE_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCTTYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_RATING_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="RATING" Type="Self.RATING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="RATING">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LIMUPAStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
+          <EntitySet Name="CARTs" EntityType="Self.CART" />
+          <EntitySet Name="CARTDETAILs" EntityType="Self.CARTDETAIL" />
+          <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
+          <EntitySet Name="FAVORITEs" EntityType="Self.FAVORITE" />
+          <EntitySet Name="FEATUREs" EntityType="Self.FEATURE" />
+          <EntitySet Name="MEMBERs" EntityType="Self.MEMBER" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
+          <EntitySet Name="ORDERSTATUS" EntityType="Self.ORDERSTATU" />
+          <EntitySet Name="PAYMENTs" EntityType="Self.PAYMENT" />
+          <EntitySet Name="PRODUCERs" EntityType="Self.PRODUCER" />
+          <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
+          <EntitySet Name="PRODUCTTYPEs" EntityType="Self.PRODUCTTYPE" />
+          <EntitySet Name="RATINGs" EntityType="Self.RATING" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLE" />
+          <AssociationSet Name="PK_ACCOUNT_MEMBER" Association="Self.PK_ACCOUNT_MEMBER">
+            <End Role="MEMBER" EntitySet="MEMBERs" />
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ACCOUNT_ROLES" Association="Self.PK_ACCOUNT_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CART_ACCOUNT" Association="Self.PK_CART_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="CART" EntitySet="CARTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_COMMENT_ACCOUNT" Association="Self.PK_COMMENT_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="COMMENT" EntitySet="COMMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_FAVORITE_ACCOUNT" Association="Self.PK_FAVORITE_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="FAVORITE" EntitySet="FAVORITEs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_ACCOUNT" Association="Self.PK_ORDERS_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_RATING_ACCOUNT" Association="Self.PK_RATING_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="RATING" EntitySet="RATINGs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CARTDETAIL_CART" Association="Self.PK_CARTDETAIL_CART">
+            <End Role="CART" EntitySet="CARTs" />
+            <End Role="CARTDETAIL" EntitySet="CARTDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_CART" Association="Self.PK_ORDERS_CART">
+            <End Role="CART" EntitySet="CARTs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CARTDETAIL_PRODUCT" Association="Self.PK_CARTDETAIL_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="CARTDETAIL" EntitySet="CARTDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_COMMENT_PRODUCT" Association="Self.PK_COMMENT_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="COMMENT" EntitySet="COMMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_FAVORITE_PRODUCT" Association="Self.PK_FAVORITE_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="FAVORITE" EntitySet="FAVORITEs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_FEATURE_PRODUCT" Association="Self.PK_FEATURE_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="FEATURE" EntitySet="FEATUREs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_PAYMENT" Association="Self.PK_ORDERS_PAYMENT">
+            <End Role="PAYMENT" EntitySet="PAYMENTs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_STATUS" Association="Self.PK_ORDERS_STATUS">
+            <End Role="ORDERSTATUS" EntitySet="ORDERSTATUS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="PK_PRODUCT_PRODUCER" Association="Self.PK_PRODUCT_PRODUCER">
+            <End Role="PRODUCER" EntitySet="PRODUCERs" />
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_PRODUCT_PRODUCTTYPE" Association="Self.PK_PRODUCT_PRODUCTTYPE">
+            <End Role="PRODUCTTYPE" EntitySet="PRODUCTTYPEs" />
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_RATING_PRODUCT" Association="Self.PK_RATING_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="RATING" EntitySet="RATINGs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LIMUPAStoreModelStoreContainer" CdmEntityContainer="LIMUPAStoreEntities">
+          <EntitySetMapping Name="ACCOUNTs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.ACCOUNT">
+              <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="ACCOUNT_FIRSTNAME" ColumnName="ACCOUNT_FIRSTNAME" />
+                <ScalarProperty Name="ACCOUNT_LASTNAME" ColumnName="ACCOUNT_LASTNAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ACCOUNT_PASSWORD" ColumnName="ACCOUNT_PASSWORD" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="ACCOUNT_ADDRESS" ColumnName="ACCOUNT_ADDRESS" />
+                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARTs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.CART">
+              <MappingFragment StoreEntitySet="CART">
+                <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARTDETAILs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.CARTDETAIL">
+              <MappingFragment StoreEntitySet="CARTDETAIL">
+                <ScalarProperty Name="CARTDETAIL_ID" ColumnName="CARTDETAIL_ID" />
+                <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMENTs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.COMMENT">
+              <MappingFragment StoreEntitySet="COMMENT">
+                <ScalarProperty Name="COMMENT_ID" ColumnName="COMMENT_ID" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAVORITEs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.FAVORITE">
+              <MappingFragment StoreEntitySet="FAVORITE">
+                <ScalarProperty Name="FAVORITE_ID" ColumnName="FAVORITE_ID" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FEATUREs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.FEATURE">
+              <MappingFragment StoreEntitySet="FEATURE">
+                <ScalarProperty Name="FEATURE_ID" ColumnName="FEATURE_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBERs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.MEMBER">
+              <MappingFragment StoreEntitySet="MEMBER">
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="MEMBER_NAME" ColumnName="MEMBER_NAME" />
+                <ScalarProperty Name="BONUS" ColumnName="BONUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERS">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.ORDER">
+              <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="SHIP_ADDRESS" ColumnName="SHIP_ADDRESS" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERSTATUS">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.ORDERSTATU">
+              <MappingFragment StoreEntitySet="ORDERSTATUS">
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+                <ScalarProperty Name="STATUS_NAME" ColumnName="STATUS_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYMENTs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.PAYMENT">
+              <MappingFragment StoreEntitySet="PAYMENT">
+                <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
+                <ScalarProperty Name="PAYMENT_METHOD" ColumnName="PAYMENT_METHOD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCERs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.PRODUCER">
+              <MappingFragment StoreEntitySet="PRODUCER">
+                <ScalarProperty Name="PRODUCER_ID" ColumnName="PRODUCER_ID" />
+                <ScalarProperty Name="PRODUCER_NAME" ColumnName="PRODUCER_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="COLOR" ColumnName="COLOR" />
+                <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
+                <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_COUNT" ColumnName="PRODUCT_COUNT" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="PRODUCER_ID" ColumnName="PRODUCER_ID" />
+                <ScalarProperty Name="PRODUCTTYPE_ID" ColumnName="PRODUCTTYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTTYPEs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.PRODUCTTYPE">
+              <MappingFragment StoreEntitySet="PRODUCTTYPE">
+                <ScalarProperty Name="PRODUCTTYPE_ID" ColumnName="PRODUCTTYPE_ID" />
+                <ScalarProperty Name="TYPE_NAME" ColumnName="TYPE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RATINGs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.RATING">
+              <MappingFragment StoreEntitySet="RATING">
+                <ScalarProperty Name="RATING_ID" ColumnName="RATING_ID" />
+                <ScalarProperty Name="STAR" ColumnName="STAR" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.ROLE">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+                <ScalarProperty Name="ROLE_NAME" ColumnName="ROLE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

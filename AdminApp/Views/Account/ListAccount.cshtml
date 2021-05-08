@@ -1,0 +1,82 @@
+﻿@model IEnumerable<AdminApp.Models.ACCOUNT>
+
+@{
+    ViewBag.Title = "ListAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListAccount</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ACCOUNT_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACCOUNT_FIRSTNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACCOUNT_LASTNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACCOUNT_PASSWORD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHONE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACCOUNT_ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ROLE_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MEMBER_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_FIRSTNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_LASTNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_PASSWORD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHONE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ROLE_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MEMBER_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
