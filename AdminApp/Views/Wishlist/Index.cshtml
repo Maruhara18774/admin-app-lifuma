@@ -1,0 +1,62 @@
+﻿@using AdminApp.Models
+@model List<PRODUCT>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="active">Wishlist</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Wishlist Area Strat-->
+<div class="wishlist-area pt-60 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="li-product-remove">remove</th>
+                                    <th class="li-product-thumbnail">images</th>
+                                    <th class="cart-product-name">Product</th>
+                                    <th class="li-product-price">Unit Price</th>
+                                    <th class="li-product-stock-status">Stock Status</th>
+                                    <th class="li-product-add-cart">add to cart</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td class="li-product-remove">@Html.ActionLink(" ", "XoaYeuThich", "Wishlist", new { @id = item.PRODUCT_ID }, new { @class = "fa fa-times" })</td>
+                                    <td class="li-product-thumbnail"><a href="#"><img src="@Url.Content(item.PRODUCT_IMAGE)" width="100" height="100" alt="@item.PRODUCT_NAME"></a></td>
+                                    <td class="li-product-name"><a href="#">@item.PRODUCT_NAME</a></td>
+                                    <td class="li-product-price"><span class="amount">@string.Format("{0:N0} ₫", item.PRICE)</span></td>
+                                    @if (item.PRODUCT_COUNT > 0) 
+                                    { 
+                                        <td class="li-product-stock-status"><span class="in-stock">Instock"</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="li-product-stock-status"><span class="in-stock">Outstock"</span></td>
+                                    } 
+                                    <td class="li-product-add-cart"><a href="@Url.Action("ThemSanPham","Cart", new { @id = item.PRODUCT_ID, @strURL = Request.Url.ToString() })">Add to cart</a></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

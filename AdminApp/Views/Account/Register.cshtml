@@ -1,0 +1,68 @@
+﻿@model AdminApp.Models.ACCOUNT
+
+@{ ViewBag.Title = "Register";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="active">Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+            @using (Html.BeginForm("Register","Account",FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="login-form">
+                    <h4 class="login-title">Register</h4>
+                    <div class="row">
+                        <div class="col-md-6 col-12 mb-20">
+                            @Html.LabelFor(m => m.ACCOUNT_FIRSTNAME)
+                            @Html.TextBoxFor(m => m.ACCOUNT_FIRSTNAME, "", new { @class = "mb-0", @placeholder = "First Name" })
+                            @Html.ValidationMessageFor(m => m.ACCOUNT_FIRSTNAME)
+                        </div>
+                        <div class="col-md-6 col-12 mb-20">
+                            @Html.LabelFor(m => m.ACCOUNT_LASTNAME)
+                            @Html.TextBoxFor(m => m.ACCOUNT_LASTNAME, "", new { @class = "mb-0", @placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(m => m.ACCOUNT_LASTNAME)
+                        </div>
+                        <div class="col-md-12 mb-20">
+                            @Html.LabelFor(m => m.EMAIL)
+                            @Html.TextBoxFor(m => m.EMAIL, "", new { @class = "mb-0", @placeholder = "Email" })
+                            @Html.ValidationMessageFor(m => m.EMAIL)
+                            @if (ViewBag.error != null)
+                            {
+                                <span class="badge badge-danger">@ViewBag.error</span>
+                            }
+                        </div>
+                        <div class="col-md-6 mb-20">
+                            @Html.LabelFor(m => m.ACCOUNT_PASSWORD)
+                            @Html.TextBoxFor(m => m.ACCOUNT_PASSWORD, new { @class = "mb-0", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.ACCOUNT_PASSWORD)
+                        </div>
+                        <div class="col-md-6 mb-20">
+                            @Html.LabelFor(m => m.ACCOUNT_CONFIRM)
+                            @Html.TextBoxFor(m => m.ACCOUNT_CONFIRM, new { @class = "mb-0", @placeholder = "Confirm Password" })
+                            @Html.ValidationMessageFor(m => m.ACCOUNT_CONFIRM)
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" name="submit" class="register-button mt-0" value="Register" />
+                        </div>
+                    </div>
+                </div>}
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

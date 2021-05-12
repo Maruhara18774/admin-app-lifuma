@@ -15,7 +15,7 @@ namespace AdminApp
             routes.MapRoute(
                 name: "Default",
                 url: "{area}/{controller}/{action}/{id}",
-                defaults: new { area = "Main", controller = "Login", action = "Login", id = UrlParameter.Optional }
+                defaults: new { area = "Main", controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "AdminDefault",

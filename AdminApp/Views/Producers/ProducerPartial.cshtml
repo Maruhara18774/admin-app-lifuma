@@ -1,0 +1,6 @@
+﻿@using AdminApp.Models
+@model List<PRODUCER>
+@foreach (var item in Model)
+{
+    <li>@Html.ActionLink(item.PRODUCER_NAME, "ListProduct", "Product", new { producerName = item.PRODUCER_NAME.Trim() },"")</li>
+}

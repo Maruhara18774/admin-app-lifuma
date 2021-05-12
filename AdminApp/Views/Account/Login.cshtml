@@ -1,0 +1,68 @@
+﻿@model AdminApp.Models.ACCOUNT
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="active">Login</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
+                <!-- Login Form s-->
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="login-form">
+                        <h4 class="login-title">Login</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb-20">
+                                @Html.LabelFor(m => m.EMAIL)
+                                @Html.TextBoxFor(m => m.EMAIL, new { @class = "mb-0", @placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.EMAIL)
+                                @if (ViewBag.error != null)
+                                {
+                                    <span class="badge badge-danger">@ViewBag.error</span>
+                                }
+
+                            </div>
+                            <div class="col-12 mb-20">
+                                @Html.LabelFor(m => m.ACCOUNT_PASSWORD)
+                                @Html.PasswordFor(m => m.ACCOUNT_PASSWORD, new { @class = "mb-0", @placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.ACCOUNT_PASSWORD)
+                            </div>
+                            <div class="col-md-8">
+                                <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                                    <input type="checkbox" id="remember_me">
+                                    <label for="remember_me">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+                                <a href="#"> Forgotten pasward?</a>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" name="submit" class="mt-0" value="Login" />
+                            </div>
+                        </div>
+                    </div>}
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

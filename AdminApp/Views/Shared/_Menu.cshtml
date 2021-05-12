@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="hb-menu">
+    <nav>
+        <ul>
+            <li class="dropdown-holder">@Html.ActionLink("Home","Index","Home")</li>
+            <li class="megamenu-holder">
+                <a href="shop-left-sidebar.html">Shop</a>
+                <ul class="megamenu hb-megamenu">
+                    <li>
+                        @Html.ActionLink("Hãng sãn xuất", "ListProduct", "Product", new { producerName = "All" },"")
+                        <ul>
+                            @*<li>@Html.ActionLink("iPhone", "iPhone", "Product")</li>
+                            <li>@Html.ActionLink("Samsung","Samsung","Product")</li>
+                            <li>@Html.ActionLink("Xiaomi", "Xiaomi", "Product")</li>
+                            <li>@Html.ActionLink("Oppo", "Oppo", "Product")</li>
+                            <li>@Html.ActionLink("Huawei", "Huawei", "Product")</li>
+                            <li>@Html.ActionLink("Vsmart", "Vsmart", "Product")</li>
+                            <li>@Html.ActionLink("Vivo", "Vivo", "Product")</li>*@
+
+
+                            @{ Html.RenderAction("ProducerPartial", "Producers"); }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="single-product-gallery-left.html">Mức giá</a>
+                        <ul>
+                            <li><a href="single-product-carousel.html">Dưới 2 triệu</a></li>
+                            <li><a href="single-product-gallery-left.html">Từ 2 đến 4 triệu</a></li>
+                            <li><a href="single-product-gallery-right.html">Từ 4 đến 6 triệu</a></li>
+                            <li><a href="single-product-tab-style-top.html">Từ 6 đến 10 triệu</a></li>
+                            <li><a href="single-product-tab-style-left.html">Từ 10 đến 15 triệu</a></li>
+                            <li><a href="single-product-tab-style-right.html">Trên 15 triệu</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="single-product.html">Sản phẩm</a>
+                        <ul>
+                            <li><a href="single-product.html">Điện thoại</a></li>
+                            <li><a href="single-product-sale.html">Tablet</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            @*<li class="dropdown-holder">
+                <a href="blog-left-sidebar.html">Blog</a>
+                <ul class="hb-dropdown">
+                    <li class="sub-dropdown-holder">
+                        <a href="blog-left-sidebar.html">Blog Grid View</a>
+                        <ul class="hb-dropdown hb-sub-dropdown">
+                            <li><a href="blog-2-column.html">Blog 2 Column</a></li>
+                            <li><a href="blog-3-column.html">Blog 3 Column</a></li>
+                            <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
+                            <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-dropdown-holder">
+                        <a href="blog-list-left-sidebar.html">Blog List View</a>
+                        <ul class="hb-dropdown hb-sub-dropdown">
+                            <li><a href="blog-list.html">Blog List</a></li>
+                            <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
+                            <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-dropdown-holder">
+                        <a href="blog-details-left-sidebar.html">Blog Details</a>
+                        <ul class="hb-dropdown hb-sub-dropdown">
+                            <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
+                            <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-dropdown-holder">
+                        <a href="blog-gallery-format.html">Blog Format</a>
+                        <ul class="hb-dropdown hb-sub-dropdown">
+                            <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
+                            <li><a href="blog-video-format.html">Blog Video Format</a></li>
+                            <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="megamenu-static-holder">
+                <a href="index.html">Pages</a>
+                <ul class="megamenu hb-megamenu">
+                    <li>
+                        <a href="blog-left-sidebar.html">Blog Layouts</a>
+                        <ul>
+                            <li><a href="blog-2-column.html">Blog 2 Column</a></li>
+                            <li><a href="blog-3-column.html">Blog 3 Column</a></li>
+                            <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
+                            <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
+                            <li><a href="blog-list.html">Blog List</a></li>
+                            <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
+                            <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="blog-details-left-sidebar.html">Blog Details Pages</a>
+                        <ul>
+                            <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
+                            <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
+                            <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
+                            <li><a href="blog-video-format.html">Blog Video Format</a></li>
+                            <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index.html">Other Pages</a>
+                        <ul>
+                            <li><a href="login-register.html">My Account</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
+                            <li><a href="compare.html">Compare</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index.html">Other Pages 2</a>
+                        <ul>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="404.html">404 Error</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>*@
+            <li><a href="">About Us</a></li>
+            <li>@Html.ActionLink("Contact","Index","Contact")</li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Bottom Menu Area End Here -->
