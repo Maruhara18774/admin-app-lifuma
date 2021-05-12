@@ -19,7 +19,16 @@ namespace AdminApp.Controllers
         [HttpPost]
         public ActionResult Login(ACCOUNT inputAccount)
         {
-            return View();
+            var check = db.ACCOUNTs.Where(acc => acc.EMAIL == inputAccount.EMAIL&& acc.ACCOUNT_PASSWORD == inputAccount.ACCOUNT_PASSWORD).FirstOrDefault();
+            if(check == null)
+            {
+                return View(inputAccount);
+            }
+            if(check.ROLE.ROLE_NAME == "Admin")
+            {
+                return RedirectToRoute(new { area = "Admin", controller = "ManageAccount", action = "ListAccount" });
+            }
+            return RedirectToRoute(new { area = "Customer", controller = "Login", action = "Login" });
         }
     }
 }

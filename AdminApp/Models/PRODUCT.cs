@@ -17,10 +17,10 @@ namespace AdminApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCT()
         {
-            this.CARTDETAILs = new HashSet<CARTDETAIL>();
             this.COMMENTs = new HashSet<COMMENT>();
             this.FAVORITEs = new HashSet<FAVORITE>();
             this.FEATUREs = new HashSet<FEATURE>();
+            this.ORDER_DETAIL = new HashSet<ORDER_DETAIL>();
             this.RATINGs = new HashSet<RATING>();
         }
     
@@ -30,19 +30,20 @@ namespace AdminApp.Models
         public string COLOR { get; set; }
         public string PRODUCT_IMAGE { get; set; }
         public string PRODUCT_DESCRIPTION { get; set; }
+        public string PRODUCT_CONFIGURATION { get; set; }
         public Nullable<int> PRODUCT_COUNT { get; set; }
         public Nullable<System.DateTime> CREATE_DATE { get; set; }
         public Nullable<int> PRODUCER_ID { get; set; }
         public Nullable<int> PRODUCTTYPE_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARTDETAIL> CARTDETAILs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FAVORITE> FAVORITEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FEATURE> FEATUREs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER_DETAIL> ORDER_DETAIL { get; set; }
         public virtual PRODUCER PRODUCER { get; set; }
         public virtual PRODUCTTYPE PRODUCTTYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

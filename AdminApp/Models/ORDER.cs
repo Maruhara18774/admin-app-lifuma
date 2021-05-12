@@ -14,8 +14,14 @@ namespace AdminApp.Models
     
     public partial class ORDER
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ORDER()
+        {
+            this.ORDER_DETAIL = new HashSet<ORDER_DETAIL>();
+        }
+    
         public int ORDER_ID { get; set; }
-        public Nullable<int> ACCOUNT_ID { get; set; }
+        public Nullable<int> CUSTOMER_ID { get; set; }
         public string SHIP_ADDRESS { get; set; }
         public string PHONE { get; set; }
         public Nullable<System.DateTime> CREATE_DATE { get; set; }
@@ -23,10 +29,10 @@ namespace AdminApp.Models
         public Nullable<int> STATUS_ID { get; set; }
         public Nullable<double> DISCOUNT { get; set; }
         public Nullable<double> TOTAL { get; set; }
-        public Nullable<int> CART_ID { get; set; }
     
-        public virtual ACCOUNT ACCOUNT { get; set; }
-        public virtual CART CART { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER_DETAIL> ORDER_DETAIL { get; set; }
         public virtual PAYMENT PAYMENT { get; set; }
         public virtual ORDERSTATU ORDERSTATU { get; set; }
     }

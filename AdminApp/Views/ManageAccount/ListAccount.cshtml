@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AdminApp.Models.ACCOUNT>
+
+@{
+    ViewBag.Title = "ListAccount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin:auto">Danh sách tài khoản</h2>
+
+@Html.ActionLink("Tạo tài khoản", "Create", "ManageAccount", new { @class = "btn btn-default" })
+<table class="table">
+    <tr>
+        <th><b>Mã tài khoản</b></th>
+        <th><b>Tên</b></th>
+        <th><b>Họ</b></th>
+        <th><b>Email</b></th>
+        <th><b>Mật khẩu</b></th>
+        <th><b>Số điện thoại</b></th>
+        <th><b>Địa chỉ</b></th>
+        <th><b>Phân quyền</b></th>
+        <th>Membership</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_FIRSTNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_LASTNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_PASSWORD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHONE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ROLE.ROLE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MEMBER.MEMBER_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.ACCOUNT_ID}) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ACCOUNT_ID })
+        </td>
+    </tr>
+}
+
+</table>

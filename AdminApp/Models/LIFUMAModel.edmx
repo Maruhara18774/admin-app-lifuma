@@ -15,28 +15,9 @@
           <Property Name="EMAIL" Type="varchar" MaxLength="100" />
           <Property Name="ACCOUNT_PASSWORD" Type="varchar" MaxLength="100" />
           <Property Name="PHONE" Type="varchar" MaxLength="20" />
-          <Property Name="ACCOUNT_ADDRESS" Type="text" />
+          <Property Name="ACCOUNT_ADDRESS" Type="nvarchar" MaxLength="255" />
           <Property Name="ROLE_ID" Type="int" />
           <Property Name="MEMBER_ID" Type="int" />
-        </EntityType>
-        <EntityType Name="CART">
-          <Key>
-            <PropertyRef Name="CART_ID" />
-          </Key>
-          <Property Name="CART_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ACCOUNT_ID" Type="int" />
-          <Property Name="CREATE_DATE" Type="datetime" />
-          <Property Name="TOTAL" Type="float" />
-        </EntityType>
-        <EntityType Name="CARTDETAIL">
-          <Key>
-            <PropertyRef Name="CARTDETAIL_ID" />
-          </Key>
-          <Property Name="CARTDETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CART_ID" Type="int" />
-          <Property Name="PRODUCT_ID" Type="int" />
-          <Property Name="PRICE" Type="float" />
-          <Property Name="QUANTITY" Type="int" />
         </EntityType>
         <EntityType Name="COMMENT">
           <Key>
@@ -45,6 +26,17 @@
           <Property Name="COMMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CONTENT" Type="text" />
           <Property Name="PRODUCT_ID" Type="int" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CUSTOMER_FIRSTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CUSTOMER_LASTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="PHONE" Type="varchar" MaxLength="20" />
+          <Property Name="CUSTOMER_ADDRESS" Type="nvarchar" MaxLength="255" />
           <Property Name="ACCOUNT_ID" Type="int" />
         </EntityType>
         <EntityType Name="FAVORITE">
@@ -70,20 +62,29 @@
           <Property Name="MEMBER_NAME" Type="nvarchar" MaxLength="100" />
           <Property Name="BONUS" Type="float" />
         </EntityType>
+        <EntityType Name="ORDER_DETAIL">
+          <Key>
+            <PropertyRef Name="ORDER_DETAIL_ID" />
+          </Key>
+          <Property Name="ORDER_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="int" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="ORDER_ID" Type="int" />
+        </EntityType>
         <EntityType Name="ORDERS">
           <Key>
             <PropertyRef Name="ORDER_ID" />
           </Key>
           <Property Name="ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ACCOUNT_ID" Type="int" />
-          <Property Name="SHIP_ADDRESS" Type="text" />
+          <Property Name="CUSTOMER_ID" Type="int" />
+          <Property Name="SHIP_ADDRESS" Type="nvarchar" MaxLength="255" />
           <Property Name="PHONE" Type="varchar" MaxLength="20" />
           <Property Name="CREATE_DATE" Type="datetime" />
           <Property Name="PAYMENT_ID" Type="int" />
           <Property Name="STATUS_ID" Type="int" />
           <Property Name="DISCOUNT" Type="float" />
           <Property Name="TOTAL" Type="float" />
-          <Property Name="CART_ID" Type="int" />
         </EntityType>
         <EntityType Name="ORDERSTATUS">
           <Key>
@@ -116,6 +117,7 @@
           <Property Name="COLOR" Type="nvarchar" MaxLength="50" />
           <Property Name="PRODUCT_IMAGE" Type="varchar(max)" />
           <Property Name="PRODUCT_DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="PRODUCT_CONFIGURATION" Type="nvarchar(max)" />
           <Property Name="PRODUCT_COUNT" Type="int" />
           <Property Name="CREATE_DATE" Type="datetime" />
           <Property Name="PRODUCER_ID" Type="int" />
@@ -126,7 +128,7 @@
             <PropertyRef Name="PRODUCTTYPE_ID" />
           </Key>
           <Property Name="PRODUCTTYPE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TYPE_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="PRODUCT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="RATING">
           <Key>
@@ -169,42 +171,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PK_CART_ACCOUNT">
-          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
-          <End Role="CART" Type="Self.CART" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ACCOUNT">
-              <PropertyRef Name="ACCOUNT_ID" />
-            </Principal>
-            <Dependent Role="CART">
-              <PropertyRef Name="ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PK_CARTDETAIL_CART">
-          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
-          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CART">
-              <PropertyRef Name="CART_ID" />
-            </Principal>
-            <Dependent Role="CARTDETAIL">
-              <PropertyRef Name="CART_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PK_CARTDETAIL_PRODUCT">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
-          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="CARTDETAIL">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PK_COMMENT_ACCOUNT">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
@@ -226,6 +192,18 @@
             </Principal>
             <Dependent Role="COMMENT">
               <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CUSTOMER_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="ACCOUNT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,27 +243,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PK_ORDERS_ACCOUNT">
-          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
-          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+        <Association Name="PK_ORDER_DETAIL_ORDER">
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="0..1" />
+          <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ACCOUNT">
-              <PropertyRef Name="ACCOUNT_ID" />
+            <Principal Role="ORDERS">
+              <PropertyRef Name="ORDER_ID" />
             </Principal>
-            <Dependent Role="ORDERS">
-              <PropertyRef Name="ACCOUNT_ID" />
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="ORDER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PK_ORDERS_CART">
-          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
+        <Association Name="PK_ORDER_DETAIL_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
           <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CART">
-              <PropertyRef Name="CART_ID" />
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
             </Principal>
             <Dependent Role="ORDERS">
-              <PropertyRef Name="CART_ID" />
+              <PropertyRef Name="CUSTOMER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -363,12 +353,12 @@
         </Association>
         <EntityContainer Name="LIMUPAStoreModelStoreContainer">
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CARTDETAIL" EntityType="Self.CARTDETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FAVORITE" EntityType="Self.FAVORITE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FEATURE" EntityType="Self.FEATURE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_DETAIL" EntityType="Self.ORDER_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDERSTATUS" EntityType="Self.ORDERSTATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAYMENT" EntityType="Self.PAYMENT" Schema="dbo" store:Type="Tables" />
@@ -385,18 +375,6 @@
             <End Role="ROLES" EntitySet="ROLES" />
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
           </AssociationSet>
-          <AssociationSet Name="PK_CART_ACCOUNT" Association="Self.PK_CART_ACCOUNT">
-            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
-            <End Role="CART" EntitySet="CART" />
-          </AssociationSet>
-          <AssociationSet Name="PK_CARTDETAIL_CART" Association="Self.PK_CARTDETAIL_CART">
-            <End Role="CART" EntitySet="CART" />
-            <End Role="CARTDETAIL" EntitySet="CARTDETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="PK_CARTDETAIL_PRODUCT" Association="Self.PK_CARTDETAIL_PRODUCT">
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-            <End Role="CARTDETAIL" EntitySet="CARTDETAIL" />
-          </AssociationSet>
           <AssociationSet Name="PK_COMMENT_ACCOUNT" Association="Self.PK_COMMENT_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="COMMENT" EntitySet="COMMENT" />
@@ -404,6 +382,10 @@
           <AssociationSet Name="PK_COMMENT_PRODUCT" Association="Self.PK_COMMENT_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="COMMENT" EntitySet="COMMENT" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CUSTOMER_ACCOUNT" Association="Self.PK_CUSTOMER_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
           </AssociationSet>
           <AssociationSet Name="PK_FAVORITE_ACCOUNT" Association="Self.PK_FAVORITE_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
@@ -417,12 +399,16 @@
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="FEATURE" EntitySet="FEATURE" />
           </AssociationSet>
-          <AssociationSet Name="PK_ORDERS_ACCOUNT" Association="Self.PK_ORDERS_ACCOUNT">
-            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+          <AssociationSet Name="PK_ORDER_DETAIL_ORDER" Association="Self.PK_ORDER_DETAIL_ORDER">
             <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
           </AssociationSet>
-          <AssociationSet Name="PK_ORDERS_CART" Association="Self.PK_ORDERS_CART">
-            <End Role="CART" EntitySet="CART" />
+          <AssociationSet Name="PK_ORDER_DETAIL_PRODUCT" Association="Self.PK_ORDER_DETAIL_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_CUSTOMER" Association="Self.PK_ORDERS_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="ORDERS" EntitySet="ORDERS" />
           </AssociationSet>
           <AssociationSet Name="PK_ORDERS_PAYMENT" Association="Self.PK_ORDERS_PAYMENT">
@@ -465,40 +451,15 @@
           <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ACCOUNT_PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ACCOUNT_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNT_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ROLE_ID" Type="Int32" />
           <Property Name="MEMBER_ID" Type="Int32" />
           <NavigationProperty Name="MEMBER" Relationship="Self.PK_ACCOUNT_MEMBER" FromRole="ACCOUNT" ToRole="MEMBER" />
           <NavigationProperty Name="ROLE" Relationship="Self.PK_ACCOUNT_ROLES" FromRole="ACCOUNT" ToRole="ROLES" />
-          <NavigationProperty Name="CARTs" Relationship="Self.PK_CART_ACCOUNT" FromRole="ACCOUNT" ToRole="CART" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.PK_COMMENT_ACCOUNT" FromRole="ACCOUNT" ToRole="COMMENT" />
+          <NavigationProperty Name="CUSTOMERs" Relationship="Self.PK_CUSTOMER_ACCOUNT" FromRole="ACCOUNT" ToRole="CUSTOMER" />
           <NavigationProperty Name="FAVORITEs" Relationship="Self.PK_FAVORITE_ACCOUNT" FromRole="ACCOUNT" ToRole="FAVORITE" />
-          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_ACCOUNT" FromRole="ACCOUNT" ToRole="ORDERS" />
           <NavigationProperty Name="RATINGs" Relationship="Self.PK_RATING_ACCOUNT" FromRole="ACCOUNT" ToRole="RATING" />
-        </EntityType>
-        <EntityType Name="CART">
-          <Key>
-            <PropertyRef Name="CART_ID" />
-          </Key>
-          <Property Name="CART_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ACCOUNT_ID" Type="Int32" />
-          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
-          <Property Name="TOTAL" Type="Double" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_CART_ACCOUNT" FromRole="CART" ToRole="ACCOUNT" />
-          <NavigationProperty Name="CARTDETAILs" Relationship="Self.PK_CARTDETAIL_CART" FromRole="CART" ToRole="CARTDETAIL" />
-          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_CART" FromRole="CART" ToRole="ORDERS" />
-        </EntityType>
-        <EntityType Name="CARTDETAIL">
-          <Key>
-            <PropertyRef Name="CARTDETAIL_ID" />
-          </Key>
-          <Property Name="CARTDETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CART_ID" Type="Int32" />
-          <Property Name="PRODUCT_ID" Type="Int32" />
-          <Property Name="PRICE" Type="Double" />
-          <Property Name="QUANTITY" Type="Int32" />
-          <NavigationProperty Name="CART" Relationship="Self.PK_CARTDETAIL_CART" FromRole="CARTDETAIL" ToRole="CART" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_CARTDETAIL_PRODUCT" FromRole="CARTDETAIL" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="COMMENT">
           <Key>
@@ -510,6 +471,19 @@
           <Property Name="ACCOUNT_ID" Type="Int32" />
           <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_COMMENT_ACCOUNT" FromRole="COMMENT" ToRole="ACCOUNT" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.PK_COMMENT_PRODUCT" FromRole="COMMENT" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUSTOMER_FIRSTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOMER_LASTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTOMER_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_CUSTOMER_ACCOUNT" FromRole="CUSTOMER" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.PK_ORDERS_CUSTOMER" FromRole="CUSTOMER" ToRole="ORDERS" />
         </EntityType>
         <EntityType Name="FAVORITE">
           <Key>
@@ -538,22 +512,33 @@
           <Property Name="BONUS" Type="Double" />
           <NavigationProperty Name="ACCOUNTs" Relationship="Self.PK_ACCOUNT_MEMBER" FromRole="MEMBER" ToRole="ACCOUNT" />
         </EntityType>
+        <EntityType Name="ORDER_DETAIL">
+          <Key>
+            <PropertyRef Name="ORDER_DETAIL_ID" />
+          </Key>
+          <Property Name="ORDER_DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCT_ID" Type="Int32" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="ORDER_ID" Type="Int32" />
+          <NavigationProperty Name="ORDER" Relationship="Self.PK_ORDER_DETAIL_ORDER" FromRole="ORDER_DETAIL" ToRole="ORDERS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PK_ORDER_DETAIL_PRODUCT" FromRole="ORDER_DETAIL" ToRole="PRODUCT" />
+        </EntityType>
         <EntityType Name="ORDER">
           <Key>
             <PropertyRef Name="ORDER_ID" />
           </Key>
           <Property Name="ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ACCOUNT_ID" Type="Int32" />
-          <Property Name="SHIP_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTOMER_ID" Type="Int32" />
+          <Property Name="SHIP_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
           <Property Name="PAYMENT_ID" Type="Int32" />
           <Property Name="STATUS_ID" Type="Int32" />
           <Property Name="DISCOUNT" Type="Double" />
           <Property Name="TOTAL" Type="Double" />
-          <Property Name="CART_ID" Type="Int32" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.PK_ORDERS_ACCOUNT" FromRole="ORDERS" ToRole="ACCOUNT" />
-          <NavigationProperty Name="CART" Relationship="Self.PK_ORDERS_CART" FromRole="ORDERS" ToRole="CART" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.PK_ORDERS_CUSTOMER" FromRole="ORDERS" ToRole="CUSTOMER" />
+          <NavigationProperty Name="ORDER_DETAIL" Relationship="Self.PK_ORDER_DETAIL_ORDER" FromRole="ORDERS" ToRole="ORDER_DETAIL" />
           <NavigationProperty Name="PAYMENT" Relationship="Self.PK_ORDERS_PAYMENT" FromRole="ORDERS" ToRole="PAYMENT" />
           <NavigationProperty Name="ORDERSTATU" Relationship="Self.PK_ORDERS_STATUS" FromRole="ORDERS" ToRole="ORDERSTATUS" />
         </EntityType>
@@ -591,14 +576,15 @@
           <Property Name="COLOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PRODUCT_IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PRODUCT_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_CONFIGURATION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PRODUCT_COUNT" Type="Int32" />
           <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
           <Property Name="PRODUCER_ID" Type="Int32" />
           <Property Name="PRODUCTTYPE_ID" Type="Int32" />
-          <NavigationProperty Name="CARTDETAILs" Relationship="Self.PK_CARTDETAIL_PRODUCT" FromRole="PRODUCT" ToRole="CARTDETAIL" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.PK_COMMENT_PRODUCT" FromRole="PRODUCT" ToRole="COMMENT" />
           <NavigationProperty Name="FAVORITEs" Relationship="Self.PK_FAVORITE_PRODUCT" FromRole="PRODUCT" ToRole="FAVORITE" />
           <NavigationProperty Name="FEATUREs" Relationship="Self.PK_FEATURE_PRODUCT" FromRole="PRODUCT" ToRole="FEATURE" />
+          <NavigationProperty Name="ORDER_DETAIL" Relationship="Self.PK_ORDER_DETAIL_PRODUCT" FromRole="PRODUCT" ToRole="ORDER_DETAIL" />
           <NavigationProperty Name="PRODUCER" Relationship="Self.PK_PRODUCT_PRODUCER" FromRole="PRODUCT" ToRole="PRODUCER" />
           <NavigationProperty Name="PRODUCTTYPE" Relationship="Self.PK_PRODUCT_PRODUCTTYPE" FromRole="PRODUCT" ToRole="PRODUCTTYPE" />
           <NavigationProperty Name="RATINGs" Relationship="Self.PK_RATING_PRODUCT" FromRole="PRODUCT" ToRole="RATING" />
@@ -608,7 +594,7 @@
             <PropertyRef Name="PRODUCTTYPE_ID" />
           </Key>
           <Property Name="PRODUCTTYPE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PRODUCTs" Relationship="Self.PK_PRODUCT_PRODUCTTYPE" FromRole="PRODUCTTYPE" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="RATING">
@@ -655,18 +641,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PK_CART_ACCOUNT">
-          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
-          <End Role="CART" Type="Self.CART" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ACCOUNT">
-              <PropertyRef Name="ACCOUNT_ID" />
-            </Principal>
-            <Dependent Role="CART">
-              <PropertyRef Name="ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PK_COMMENT_ACCOUNT">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
@@ -675,6 +649,18 @@
               <PropertyRef Name="ACCOUNT_ID" />
             </Principal>
             <Dependent Role="COMMENT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_CUSTOMER_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT_ID" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
               <PropertyRef Name="ACCOUNT_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -691,18 +677,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PK_ORDERS_ACCOUNT">
-          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
-          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ACCOUNT">
-              <PropertyRef Name="ACCOUNT_ID" />
-            </Principal>
-            <Dependent Role="ORDERS">
-              <PropertyRef Name="ACCOUNT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PK_RATING_ACCOUNT">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="RATING" Type="Self.RATING" Multiplicity="*" />
@@ -715,42 +689,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PK_CARTDETAIL_CART">
-          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
-          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CART">
-              <PropertyRef Name="CART_ID" />
-            </Principal>
-            <Dependent Role="CARTDETAIL">
-              <PropertyRef Name="CART_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PK_ORDERS_CART">
-          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
-          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CART">
-              <PropertyRef Name="CART_ID" />
-            </Principal>
-            <Dependent Role="ORDERS">
-              <PropertyRef Name="CART_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PK_CARTDETAIL_PRODUCT">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
-          <End Role="CARTDETAIL" Type="Self.CARTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="CARTDETAIL">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PK_COMMENT_PRODUCT">
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
           <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
@@ -760,6 +698,18 @@
             </Principal>
             <Dependent Role="COMMENT">
               <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDERS_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="CUSTOMER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -783,6 +733,30 @@
               <PropertyRef Name="PRODUCT_ID" />
             </Principal>
             <Dependent Role="FEATURE">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDER_DETAIL_ORDER">
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="0..1" />
+          <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_ORDER_DETAIL_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
               <PropertyRef Name="PRODUCT_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -849,12 +823,12 @@
         </Association>
         <EntityContainer Name="LIMUPAStoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
-          <EntitySet Name="CARTs" EntityType="Self.CART" />
-          <EntitySet Name="CARTDETAILs" EntityType="Self.CARTDETAIL" />
           <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
+          <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
           <EntitySet Name="FAVORITEs" EntityType="Self.FAVORITE" />
           <EntitySet Name="FEATUREs" EntityType="Self.FEATURE" />
           <EntitySet Name="MEMBERs" EntityType="Self.MEMBER" />
+          <EntitySet Name="ORDER_DETAIL" EntityType="Self.ORDER_DETAIL" />
           <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
           <EntitySet Name="ORDERSTATUS" EntityType="Self.ORDERSTATU" />
           <EntitySet Name="PAYMENTs" EntityType="Self.PAYMENT" />
@@ -871,41 +845,29 @@
             <End Role="ROLES" EntitySet="ROLES" />
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
           </AssociationSet>
-          <AssociationSet Name="PK_CART_ACCOUNT" Association="Self.PK_CART_ACCOUNT">
-            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
-            <End Role="CART" EntitySet="CARTs" />
-          </AssociationSet>
           <AssociationSet Name="PK_COMMENT_ACCOUNT" Association="Self.PK_COMMENT_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="COMMENT" EntitySet="COMMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_CUSTOMER_ACCOUNT" Association="Self.PK_CUSTOMER_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
           </AssociationSet>
           <AssociationSet Name="PK_FAVORITE_ACCOUNT" Association="Self.PK_FAVORITE_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="FAVORITE" EntitySet="FAVORITEs" />
           </AssociationSet>
-          <AssociationSet Name="PK_ORDERS_ACCOUNT" Association="Self.PK_ORDERS_ACCOUNT">
-            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
-            <End Role="ORDERS" EntitySet="ORDERS" />
-          </AssociationSet>
           <AssociationSet Name="PK_RATING_ACCOUNT" Association="Self.PK_RATING_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="RATING" EntitySet="RATINGs" />
           </AssociationSet>
-          <AssociationSet Name="PK_CARTDETAIL_CART" Association="Self.PK_CARTDETAIL_CART">
-            <End Role="CART" EntitySet="CARTs" />
-            <End Role="CARTDETAIL" EntitySet="CARTDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="PK_ORDERS_CART" Association="Self.PK_ORDERS_CART">
-            <End Role="CART" EntitySet="CARTs" />
-            <End Role="ORDERS" EntitySet="ORDERS" />
-          </AssociationSet>
-          <AssociationSet Name="PK_CARTDETAIL_PRODUCT" Association="Self.PK_CARTDETAIL_PRODUCT">
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-            <End Role="CARTDETAIL" EntitySet="CARTDETAILs" />
-          </AssociationSet>
           <AssociationSet Name="PK_COMMENT_PRODUCT" Association="Self.PK_COMMENT_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
             <End Role="COMMENT" EntitySet="COMMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDERS_CUSTOMER" Association="Self.PK_ORDERS_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
           </AssociationSet>
           <AssociationSet Name="PK_FAVORITE_PRODUCT" Association="Self.PK_FAVORITE_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
@@ -914,6 +876,14 @@
           <AssociationSet Name="PK_FEATURE_PRODUCT" Association="Self.PK_FEATURE_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
             <End Role="FEATURE" EntitySet="FEATUREs" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDER_DETAIL_ORDER" Association="Self.PK_ORDER_DETAIL_ORDER">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="PK_ORDER_DETAIL_PRODUCT" Association="Self.PK_ORDER_DETAIL_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
           </AssociationSet>
           <AssociationSet Name="PK_ORDERS_PAYMENT" Association="Self.PK_ORDERS_PAYMENT">
             <End Role="PAYMENT" EntitySet="PAYMENTs" />
@@ -957,33 +927,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CARTs">
-            <EntityTypeMapping TypeName="LIMUPAStoreModel.CART">
-              <MappingFragment StoreEntitySet="CART">
-                <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
-                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
-                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
-                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CARTDETAILs">
-            <EntityTypeMapping TypeName="LIMUPAStoreModel.CARTDETAIL">
-              <MappingFragment StoreEntitySet="CARTDETAIL">
-                <ScalarProperty Name="CARTDETAIL_ID" ColumnName="CARTDETAIL_ID" />
-                <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
-                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
-                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="COMMENTs">
             <EntityTypeMapping TypeName="LIMUPAStoreModel.COMMENT">
               <MappingFragment StoreEntitySet="COMMENT">
                 <ScalarProperty Name="COMMENT_ID" ColumnName="COMMENT_ID" />
                 <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
                 <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="CUSTOMER_FIRSTNAME" ColumnName="CUSTOMER_FIRSTNAME" />
+                <ScalarProperty Name="CUSTOMER_LASTNAME" ColumnName="CUSTOMER_LASTNAME" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="CUSTOMER_ADDRESS" ColumnName="CUSTOMER_ADDRESS" />
                 <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1014,11 +975,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ORDER_DETAIL">
+            <EntityTypeMapping TypeName="LIMUPAStoreModel.ORDER_DETAIL">
+              <MappingFragment StoreEntitySet="ORDER_DETAIL">
+                <ScalarProperty Name="ORDER_DETAIL_ID" ColumnName="ORDER_DETAIL_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ORDERS">
             <EntityTypeMapping TypeName="LIMUPAStoreModel.ORDER">
               <MappingFragment StoreEntitySet="ORDERS">
                 <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
-                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
                 <ScalarProperty Name="SHIP_ADDRESS" ColumnName="SHIP_ADDRESS" />
                 <ScalarProperty Name="PHONE" ColumnName="PHONE" />
                 <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
@@ -1026,7 +998,6 @@
                 <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
                 <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
                 <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
-                <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1063,6 +1034,7 @@
                 <ScalarProperty Name="COLOR" ColumnName="COLOR" />
                 <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
                 <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_CONFIGURATION" ColumnName="PRODUCT_CONFIGURATION" />
                 <ScalarProperty Name="PRODUCT_COUNT" ColumnName="PRODUCT_COUNT" />
                 <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
                 <ScalarProperty Name="PRODUCER_ID" ColumnName="PRODUCER_ID" />
@@ -1074,7 +1046,7 @@
             <EntityTypeMapping TypeName="LIMUPAStoreModel.PRODUCTTYPE">
               <MappingFragment StoreEntitySet="PRODUCTTYPE">
                 <ScalarProperty Name="PRODUCTTYPE_ID" ColumnName="PRODUCTTYPE_ID" />
-                <ScalarProperty Name="TYPE_NAME" ColumnName="TYPE_NAME" />
+                <ScalarProperty Name="PRODUCT_TYPE_NAME" ColumnName="PRODUCT_TYPE_NAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -21,7 +21,7 @@ namespace AdminApp.Models
         }
     
         public int PRODUCTTYPE_ID { get; set; }
-        public string TYPE_NAME { get; set; }
+        public string PRODUCT_TYPE_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT> PRODUCTs { get; set; }

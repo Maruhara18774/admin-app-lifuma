@@ -131,7 +131,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageAccountController.cs" />
     <Compile Include="Areas\Main\Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -139,13 +139,10 @@
     <Compile Include="Models\ACCOUNT.cs">
       <DependentUpon>LIFUMAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CART.cs">
-      <DependentUpon>LIFUMAModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CARTDETAIL.cs">
-      <DependentUpon>LIFUMAModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\COMMENT.cs">
+      <DependentUpon>LIFUMAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CUSTOMER.cs">
       <DependentUpon>LIFUMAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FAVORITE.cs">
@@ -176,6 +173,9 @@
       <DependentUpon>LIFUMAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORDERSTATU.cs">
+      <DependentUpon>LIFUMAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORDER_DETAIL.cs">
       <DependentUpon>LIFUMAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PAYMENT.cs">
@@ -3736,6 +3736,7 @@
     <Content Include="Models\LIFUMAModel.edmx.diagram">
       <DependentUpon>LIFUMAModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\ManageAccount\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3757,10 +3758,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_AdminMenu.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Account\ListAccount.cshtml" />
+    <Content Include="Views\ManageAccount\ListAccount.cshtml" />
+    <Content Include="Views\ManageAccount\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

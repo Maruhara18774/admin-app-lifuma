@@ -1,0 +1,95 @@
+﻿@model AdminApp.Models.ACCOUNT
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin:auto">Tạo tài khoản</h2>
+
+@using (Html.BeginForm("Create", "ManageAccount"))
+{
+    <div class="form-group">
+        <lable class="control-label col-md-2">Tên:</lable>
+        <div class="col-md-10">
+            <input type="text" name="ACCOUNT_FIRSTNAME" class="input-lg" placeholder="Nhập tên ..." value="@Model.ACCOUNT_FIRSTNAME" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Họ:</lable>
+        <div class="col-md-10">
+            <input type="text" name="ACCOUNT_LASTNAME" class="input-lg" placeholder="Nhập họ ..." value="@Model.ACCOUNT_LASTNAME" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Email:</lable>
+        <div class="col-md-10">
+            <input type="text" name="EMAIL" class="input-lg" placeholder="Nhập email" value="@Model.EMAIL" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Mật khẩu:</lable>
+        <div class="col-md-10">
+            <input type="text" name="ACCOUNT_PASSWORD" class="input-lg" placeholder="Nhập mật khẩu ..." value="@Model.ACCOUNT_PASSWORD" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Số điện thoại:</lable>
+        <div class="col-md-10">
+            <input type="number" name="PHONE" class="input-lg" placeholder="Nhập số điện thoại ..." value="@Model.PHONE" />
+        </div>
+    </div>
+    <div class="form-group">
+        <lable class="control-label col-md-2">Địa chỉ:</lable>
+        <div class="col-md-10">
+            <input type="text" name="ACCOUNT_ADDRESS" class="input-lg" placeholder="Nhập địa chỉ ..." value="@Model.ACCOUNT_ADDRESS" />
+        </div>
+    </div>
+    <div class="form-group">
+        <lable class="control-label col-md-2">Phân quyền:</lable>
+        <div class="col-md-10">
+            <select name="ROLE_ID">
+                @foreach (var item in Model.lsROLES)
+                {
+                    if (item.ROLE_ID == Model.ROLE_ID)
+                    {
+                        <option value="@item.ROLE_ID" selected>@item.ROLE_NAME</option>
+                    }
+                    else
+                    {
+                        <option value="@item.ROLE_ID">@item.ROLE_NAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <lable class="control-label col-md-2">Membership:</lable>
+        <div class="col-md-10">
+            <select name="MEMBER_ID">
+                @foreach (var item in Model.lsMEMBERS)
+                {
+                    if (item.MEMBER_ID == Model.MEMBER_ID)
+                    {
+                        <option value="@item.MEMBER_ID" selected>@item.MEMBER_NAME</option>
+                    }
+                    else
+                    {
+                        <option value="@item.MEMBER_ID">@item.MEMBER_NAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Tạo" class="btn btn-default" />
+        </div>
+    </div>
+}
+

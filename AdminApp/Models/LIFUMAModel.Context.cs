@@ -26,12 +26,12 @@ namespace AdminApp.Models
         }
     
         public virtual DbSet<ACCOUNT> ACCOUNTs { get; set; }
-        public virtual DbSet<CART> CARTs { get; set; }
-        public virtual DbSet<CARTDETAIL> CARTDETAILs { get; set; }
         public virtual DbSet<COMMENT> COMMENTs { get; set; }
+        public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public virtual DbSet<FAVORITE> FAVORITEs { get; set; }
         public virtual DbSet<FEATURE> FEATUREs { get; set; }
         public virtual DbSet<MEMBER> MEMBERs { get; set; }
+        public virtual DbSet<ORDER_DETAIL> ORDER_DETAIL { get; set; }
         public virtual DbSet<ORDER> ORDERS { get; set; }
         public virtual DbSet<ORDERSTATU> ORDERSTATUS { get; set; }
         public virtual DbSet<PAYMENT> PAYMENTs { get; set; }

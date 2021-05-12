@@ -12,23 +12,22 @@ namespace AdminApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CART
+    public partial class CUSTOMER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CART()
+        public CUSTOMER()
         {
-            this.CARTDETAILs = new HashSet<CARTDETAIL>();
             this.ORDERS = new HashSet<ORDER>();
         }
     
-        public int CART_ID { get; set; }
+        public int CUSTOMER_ID { get; set; }
+        public string CUSTOMER_FIRSTNAME { get; set; }
+        public string CUSTOMER_LASTNAME { get; set; }
+        public string PHONE { get; set; }
+        public string CUSTOMER_ADDRESS { get; set; }
         public Nullable<int> ACCOUNT_ID { get; set; }
-        public Nullable<System.DateTime> CREATE_DATE { get; set; }
-        public Nullable<double> TOTAL { get; set; }
     
         public virtual ACCOUNT ACCOUNT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARTDETAIL> CARTDETAILs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER> ORDERS { get; set; }
     }

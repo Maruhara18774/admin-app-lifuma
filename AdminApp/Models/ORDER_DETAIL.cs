@@ -12,15 +12,15 @@ namespace AdminApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CARTDETAIL
+    public partial class ORDER_DETAIL
     {
-        public int CARTDETAIL_ID { get; set; }
-        public Nullable<int> CART_ID { get; set; }
+        public int ORDER_DETAIL_ID { get; set; }
         public Nullable<int> PRODUCT_ID { get; set; }
         public Nullable<double> PRICE { get; set; }
         public Nullable<int> QUANTITY { get; set; }
+        public Nullable<int> ORDER_ID { get; set; }
     
-        public virtual CART CART { get; set; }
+        public virtual ORDER ORDER { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
     }
 }
