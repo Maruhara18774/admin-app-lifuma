@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AdminApp.Models.ROLE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+@Html.ActionLink("Thêm role", "Create", "ManageRole", new { @class = "btn btn-default" })
+<table class="table">
+    <tr>
+        <th><b>Mã role</b></th>
+        <th><b>Tên role</b></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ROLE_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ROLE_NAME)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ROLE_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ROLE_ID })
+            </td>
+        </tr>
+    }
+
+</table>

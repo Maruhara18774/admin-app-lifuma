@@ -1,0 +1,66 @@
+﻿@model AdminApp.Models.CUSTOMER
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Sửa thông tin</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <div class="form-group">
+            <lable class="control-label col-md-2">Tên:</lable>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CUSTOMER_FIRSTNAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CUSTOMER_FIRSTNAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <lable class="control-label col-md-2">Họ:</lable>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CUSTOMER_LASTNAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CUSTOMER_LASTNAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <lable class="control-label col-md-2">Số điện thoại:</lable>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PHONE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PHONE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <lable class="control-label col-md-2">Địa chỉ:</lable>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CUSTOMER_ADDRESS, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CUSTOMER_ADDRESS, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <lable class="control-label col-md-2">Mã tài khoản:</lable>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ACCOUNT_ID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ACCOUNT_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

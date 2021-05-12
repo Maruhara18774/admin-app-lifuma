@@ -132,6 +132,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageAccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageCustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageMembershipController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageRoleController.cs" />
     <Compile Include="Areas\Main\Controllers\AboutController.cs" />
     <Compile Include="Areas\Main\Controllers\AccountController.cs" />
     <Compile Include="Areas\Main\Controllers\BlogController.cs" />
@@ -3949,8 +3953,20 @@
     <Content Include="Views\Shared\_Contact.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\ManageRole\Index.cshtml" />
+    <Content Include="Views\ManageRole\Create.cshtml" />
+    <Content Include="Views\ManageRole\Edit.cshtml" />
+    <Content Include="Views\ManageCustomer\Index.cshtml" />
+    <Content Include="Views\ManageCustomer\Create.cshtml" />
+    <Content Include="Views\ManageCustomer\Edit.cshtml" />
+    <Content Include="Views\ManageProduct\Index.cshtml" />
+    <Content Include="Views\ManageProduct\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\ManageCustomer\" />
+    <Folder Include="Areas\Admin\Views\ManageMembership\" />
+    <Folder Include="Areas\Admin\Views\ManageProduct\" />
+    <Folder Include="Areas\Admin\Views\ManageRole\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

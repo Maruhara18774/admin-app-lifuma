@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AdminApp.Models.PRODUCT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th><b>Mã sản phẩm</b></th>
+        <th><b>Tên sản phẩm</b></th>
+        <th><b>Giá</b></th>
+        <th><b>Màu sắc</b></th>
+        <th><b>Hình ảnh</b></th>
+        <th><b>Mô tả</b></th>
+        <th><b>Cấu hình</b></th>
+        <th><b>Số lượng tồn</b></th>
+        <th><b>Ngày tạo</b></th>
+        <th><b>Nhà sản xuất</b></th>
+        <th><b>Loại sản phẩm</b></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRICE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COLOR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_IMAGE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_CONFIGURATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_COUNT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CREATE_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCER.PRODUCER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCTTYPE.PRODUCT_TYPE_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PRODUCT_ID}) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PRODUCT_ID })
+        </td>
+    </tr>
+}
+
+</table>

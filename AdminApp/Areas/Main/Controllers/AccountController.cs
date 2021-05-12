@@ -25,9 +25,10 @@ namespace AdminApp.Controllers
         {
             //if (!ModelState.IsValid)
             //{
-                var f_password = GetMD5(_account.ACCOUNT_PASSWORD);
-                var check = db.ACCOUNTs.Where(s => s.EMAIL == _account.EMAIL && s.ACCOUNT_PASSWORD == f_password).FirstOrDefault();
-                if (check != null)
+            //var f_password = GetMD5(_account.ACCOUNT_PASSWORD);
+            //var check = db.ACCOUNTs.Where(s => s.EMAIL == _account.EMAIL && s.ACCOUNT_PASSWORD == f_password).FirstOrDefault();
+            var check = db.ACCOUNTs.Where(s => s.EMAIL == _account.EMAIL && s.ACCOUNT_PASSWORD == _account.ACCOUNT_PASSWORD).FirstOrDefault();
+            if (check != null)
                 {
                     if(check.ROLE.ROLE_NAME == "Admin")
                 {

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AdminApp.Models.CUSTOMER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th><b>Mã khách hàng</b></th>
+        <th><b>Tên</b></th>
+        <th><b>Họ</b></th>
+        <th><b>Số điện thoại</b></th>
+        <th><b>Địa chỉ</b></th>
+        <th><b>Mã tài khoản</b></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUSTOMER_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUSTOMER_FIRSTNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUSTOMER_LASTNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHONE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUSTOMER_ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { item.ACCOUNT_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
