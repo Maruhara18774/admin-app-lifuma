@@ -3619,11 +3619,13 @@
     <Content Include="Content\dist\css\skins\_all-skins.min.css" />
     <Content Include="Content\dist\img\featured-Sisyphe-books.jpeg" />
     <Content Include="Content\dist\img\user2-160x160.jpg" />
+    <Content Include="Content\dist\js\AddImage.js" />
     <Content Include="Content\dist\js\adminlte.js" />
     <Content Include="Content\dist\js\adminlte.min.js" />
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\Images\bg.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -3961,6 +3963,7 @@
     <Content Include="Views\ManageCustomer\Edit.cshtml" />
     <Content Include="Views\ManageProduct\Index.cshtml" />
     <Content Include="Views\ManageProduct\Create.cshtml" />
+    <Content Include="Views\ManageProduct\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ManageCustomer\" />

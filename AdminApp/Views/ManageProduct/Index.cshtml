@@ -40,7 +40,7 @@
             @Html.DisplayFor(modelItem => item.COLOR)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PRODUCT_IMAGE)
+            <img src="@Url.Content(item.PRODUCT_IMAGE)" width="150" height="150"/>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PRODUCT_DESCRIPTION)

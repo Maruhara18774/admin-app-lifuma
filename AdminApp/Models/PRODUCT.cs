@@ -11,7 +11,9 @@ namespace AdminApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -48,5 +50,10 @@ namespace AdminApp.Models
         public virtual PRODUCTTYPE PRODUCTTYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RATING> RATINGs { get; set; }
+
+        public List<PRODUCER> lsPRODUCERS { get; set; }
+        public List<PRODUCTTYPE> lsPRODUCTTYPE { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

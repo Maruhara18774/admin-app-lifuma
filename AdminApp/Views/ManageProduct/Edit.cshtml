@@ -1,16 +1,16 @@
 ﻿@model AdminApp.Models.PRODUCT
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Thêm sản phẩm</h2>
+<h2>Sửa thông tin sản phẩm</h2>
 
-@using (Html.BeginForm("Create","ManageProduct")) 
+@using (Html.BeginForm("Edit","ManageProduct"))
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
 
     <div class="form-group">
@@ -36,6 +36,7 @@
             @Html.ValidationMessageFor(model => model.COLOR, "", new { @class = "text-danger" })
         </div>
     </div>
+
 
     <div class="form-group">
         <lable class="control-label col-md-2">Mô tả:</lable>
@@ -109,7 +110,7 @@
     <div class="form-group">
         <lable class="control-label col-md-2">Hình ảnh:</lable>
         <div class="col-md-10">
-            <img src="@Url.Content(Model.PRODUCT_IMAGE)" width="150" height="150" id="previewImg"/>
+            <img src="@Url.Content(Model.PRODUCT_IMAGE)" width="150" height="150" id="previewImg" />
             <input type="file" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImg'))" value="Upload ảnh ..." />
         </div>
     </div>
@@ -119,9 +120,10 @@
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-default" />
+        </div>
+    </div>
 </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
